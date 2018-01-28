@@ -13,10 +13,23 @@ int main()
 			float de_d1 = j / 10;
 			float de_d2 = j % 10;
 			float value1 = (nu_d1 * 10 + nu_d2) / (de_d1 * 10 + de_d2);
+			float value2;
 			if (riverse_nu == j)
 				continue;
+			else if (nu_d1 == de_d1)
+				value2 = nu_d2 / de_d2;
+			else if (nu_d1 == de_d2)
+				value2 = nu_d2 / de_d1;
+			else if (nu_d2 == de_d1)
+				value2 = nu_d1 / de_d2;
+			else if (nu_d2 == de_d2)
+				value2 = nu_d1 / de_d1;
+			else
+				continue;
+
 			printf("%d %d ", i, j);
-			printf("%f\n", value1);
+			printf("%f ", value1);
+			printf("%f\n", value2);
 		}
 	}
 
