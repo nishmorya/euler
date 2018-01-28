@@ -27,9 +27,10 @@ int main()
 			else
 				continue;
 
-			printf("%d %d ", i, j);
-			printf("%f ", value1);
-			printf("%f\n", value2);
+			if (value1 == value2) {
+				printf("%d %d ", i, j);
+				printf("%f %f\n", value1, value2);
+			}
 		}
 	}
 
