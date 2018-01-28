@@ -5,6 +5,9 @@
 
 int main()
 {
+	int nu_prod = 1;
+	int de_prod = 1;
+
 	for (int i = START; i < END; i++) {
 		float nu_d1 = i / 10;
 		float nu_d2 = i % 10;
@@ -28,11 +31,26 @@ int main()
 				continue;
 
 			if ((value1 == value2) && (nu_d2 != 0)) {
-				printf("%d %d ", i, j);
-				printf("%f %f\n", value1, value2);
+				if (nu_d1 == de_d1) {
+					nu_prod *= nu_d2;
+					de_prod *= de_d2;
+				}
+				else if (nu_d1 == de_d2) {
+					nu_prod *= nu_d2;
+					de_prod *= de_d1;
+				}
+				else if (nu_d2 == de_d1) {
+					nu_prod *= nu_d1;
+					de_prod *= de_d2;
+				}
+				else {
+					nu_prod *= nu_d1;
+					de_prod *= de_d1;
+				}
 			}
 		}
 	}
+	printf("%d\n", de_prod / nu_prod);
 
 	return 0;
 }
