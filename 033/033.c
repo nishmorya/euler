@@ -27,7 +27,7 @@ int main()
 			else
 				continue;
 
-			if (value1 == value2) {
+			if ((value1 == value2) && (nu_d2 != 0)) {
 				printf("%d %d ", i, j);
 				printf("%f %f\n", value1, value2);
 			}
