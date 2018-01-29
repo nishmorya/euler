@@ -34,24 +34,21 @@ int main()
 				if (nu_d1 == de_d1) {
 					nu_prod *= nu_d2;
 					de_prod *= de_d2;
-				}
-				else if (nu_d1 == de_d2) {
+				} else if (nu_d1 == de_d2) {
 					nu_prod *= nu_d2;
 					de_prod *= de_d1;
-				}
-				else if (nu_d2 == de_d1) {
+				} else if (nu_d2 == de_d1) {
 					nu_prod *= nu_d1;
 					de_prod *= de_d2;
-				}
-				else {
+				} else {
 					nu_prod *= nu_d1;
 					de_prod *= de_d1;
 				}
 			}
 		}
 	}
-	printf("%d\n", de_prod / nu_prod);
 
+	printf("%d\n", de_prod / nu_prod);
 	return 0;
 }
 
