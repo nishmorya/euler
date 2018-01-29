@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int factorial(int n)
 {
@@ -15,7 +16,14 @@ int factorial(int n)
 
 int main()
 {
-	printf("%d\n", factorial(0));
+	int *values;
+	values = malloc(10 * sizeof(int));
+
+	for (int i = 0; i < 10; i++) {
+		values[i] = factorial(i);
+		printf("%d\n", values[i]);
+	}
+
 	return 0;
 }
 
