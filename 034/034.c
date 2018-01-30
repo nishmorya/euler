@@ -21,9 +21,21 @@ int main()
 
 	for (int i = 0; i < 10; i++) {
 		values[i] = factorial(i);
-		printf("%d\n", values[i]);
 	}
 
+	int start = values[3];
+	int end = values[9] * 7;
+
+	for (int i = start; i <= end; i++) {
+		int remainder;
+		int number = i;
+		while (number > 0) {
+			remainder = number % 10;
+			number /= 10;
+			printf("%d", remainder);
+		}
+		printf("\n");
+	}
 	return 0;
 }
 
