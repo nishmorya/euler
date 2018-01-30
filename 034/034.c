@@ -16,6 +16,7 @@ int factorial(int n)
 
 int main()
 {
+	int total = 0;
 	int *values;
 	values = malloc(10 * sizeof(int));
 
@@ -35,8 +36,11 @@ int main()
 			number /= 10;
 			sum += factorial(remainder);
 		}
-		printf("%d\n", sum);
+		if (sum == i)
+			 total += sum;
 	}
+
+	printf("%d\n", total);
 	return 0;
 }
 
