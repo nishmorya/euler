@@ -29,12 +29,13 @@ int main()
 	for (int i = start; i <= end; i++) {
 		int remainder;
 		int number = i;
+		int sum = 0;
 		while (number > 0) {
 			remainder = number % 10;
 			number /= 10;
-			printf("%d", remainder);
+			sum += factorial(remainder);
 		}
-		printf("\n");
+		printf("%d\n", sum);
 	}
 	return 0;
 }
