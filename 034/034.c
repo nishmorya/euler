@@ -17,25 +17,25 @@ int factorial(int n)
 int main()
 {
 	int total = 0;
-	int *values;
-	values = malloc(10 * sizeof(int));
+	int *factorials;
+	factorials = malloc(10 * sizeof(int));
 
 	for (int i = 0; i < 10; i++) {
-		values[i] = factorial(i);
+		factorials[i] = factorial(i);
 	}
 
-	int start = values[3];
-	int end = values[9] * 7;
+	int start = factorials[3];
+	int end = factorials[9] * 7;
 
 	for (int i = start; i <= end; i++) {
-		int remainder;
 		int number = i;
 		int sum = 0;
-		while (number > 0) {
-			remainder = number % 10;
+
+		while (number) {
+			sum += factorials[number % 10];
 			number /= 10;
-			sum += factorial(remainder);
 		}
+
 		if (sum == i)
 			 total += sum;
 	}
