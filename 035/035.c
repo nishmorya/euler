@@ -3,6 +3,7 @@
 #include <math.h>
 
 #define LIMIT 1000000
+#define SIZE 6
 
 int is_prime(int n)
 {
@@ -23,19 +24,23 @@ int is_prime(int n)
 
 int main()
 {
-	int ***number;
-	number = (int***)malloc(sizeof(int**) * (LIMIT / 2));
-	int count = 0;
+	int number[SIZE][SIZE];
 	int remainder;
+	int count = 0;
 
-	for (int i = 3; i <= LIMIT; i = i + 2) {
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			number[i][j] = 0;
+		}
+	}
+
+	for (int i = 3; i <= LIMIT; i+=2) {
 		if (is_prime(i)) {
 			int flag = 0;
 			int prime = i;
 			int digits = log10(i) + 1;
-			number[count] = (int**)malloc(sizeof(int*) * digits);
-			number[count][0] = (int*)malloc(sizeof(int) * digits);
 			int index = 0;
+			int l, r;
 
 			while (prime) {
 				remainder = prime % 10;
@@ -43,18 +48,17 @@ int main()
 					flag = 1;
 					break;
 				}
-				number[count][0][index++] = remainder;
-				int l = index;
-				int r = 1;
+				number[0][index++] = remainder;
+				l = index;
+				r = 1;
 
 				while (l < digits) {
-					number[count][r] = (int*)malloc(sizeof(int) * digits);
-					number[count][r++][l++] = remainder;
+					number[r++][l++] = remainder;
 				}
 
 				l = 0;
-				if (r < digits) {
-					number[count][r++][l++] = remainder;
+				while (r < digits) {
+					number[r++][l++] = remainder;
 				}
 
 				prime /= 10;
@@ -63,19 +67,22 @@ int main()
 			if (flag)
 				continue;
 
-			int rotation = 0;
-			while (rotation < digits) {
-				int location = 0;
+			r = 0;
+
+			while (r < digits) {
+				l = 0;
 				int value = 0;
-				while (location < digits) {
-					value = value + (number[count][rotation][location] * pow(10, location));
-					location++;
+
+				while (l < digits) {
+					value = value + (number[r][l] * pow(10, l));
+					l++;
 				}
-				rotation++;
+
 				if (!is_prime(value)) {
 					flag = 1;
 					break;
 				}
+				r++;
 			}
 
 			if (flag == 0) {
