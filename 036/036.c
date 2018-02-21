@@ -4,38 +4,26 @@
 
 #define LIMIT 1000000
 
-int is_palindromic(int n)
+int is_palindromic(int n, int base, int digits)
 {
-	int digits = log10(n) + 1;
-	int *number;
-	number = (int*) malloc(sizeof(int) * digits);
+	if (n % base == 0)
+		return 0;
+
+	int *number = (int*)malloc(sizeof(int) * digits);
 	int i = 0;
 
 	while (n) {
-		number[i++] = n % 10;
-		n /= 10;
+		number[i++] = n % base;
+		n /= base;
 	}
 
-	int mid;
-
-	if (digits % 2) {
-		mid = (digits - 2) / 2;
-	} else {
-		mid = (digits - 1) / 2;
-	}
-
-	int flag = 0;
 	int j = 0;
 	int k = digits - 1;
-	while (j <= mid) {
-		if (number[j++] != number[k--]) {
-			flag = 1;
-			break;
-		}
-	}
 
-	if (flag) {
-		return 0;
+	while (j < k) {
+		if (number[j++] != number[k--]) {
+			return 0;
+		}
 	}
 
 	return 1;
@@ -43,6 +31,19 @@ int is_palindromic(int n)
 
 int main()
 {
+	int sum = 0;
+
+	for (int i = 1; i < LIMIT; i++) {
+		int digits = log10(i) + 1; 
+		if (is_palindromic(i, 10, digits)) {
+			digits = log2(i) + 1;
+			if (is_palindromic(i, 2, digits)) {
+				sum += i;
+			}
+		}
+	}
+
+	printf("%d\n", sum);
 	return 0;
 }
 
