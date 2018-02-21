@@ -22,10 +22,12 @@ int is_palindromic(int n, int base, int digits)
 
 	while (j < k) {
 		if (number[j++] != number[k--]) {
+			free(number);
 			return 0;
 		}
 	}
 
+	free(number);
 	return 1;
 }
 
