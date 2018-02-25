@@ -15,27 +15,40 @@ int is_unique_digit(int number[], int digits)
 	return 1;
 }
 
+int *separate_digits(int n, int digits, int *number)
+{
+	int d = digits;
+	int k = 0;
+
+	while (d) {
+		int divisor = pow(10, d - 1);
+		number[k++] = n / divisor;
+		n %= divisor;
+		d--;
+	}
+	return number;
+}
+
 int main()
 {
-	int number[SIZE];
-	for (int i = 0; i < SIZE; i++) {
-		number[i] = 0;
-	}
-
 	for (int i = 1; i < 900; i++) {
-		int n = i;
-		int digits = log10(n) + 1;
-		int j = 0;
-		int d = digits;
-		while (d)  {
-			int divisor = pow(10, d - 1);
-			number[j++] = n / divisor;
-			n %= divisor;
-			d--;
-		}
-		printf("%d: %d\n", i, is_unique_digit(number, digits));
-	}
+		int digits = log10(i) + 1;
+		int *number = (int*)malloc(sizeof(int) * digits);
+		separate_digits(i, digits, number);
+		printf("%d\n", is_unique_digit(number, digits));
+		free(number);
 
-	return  0;
+		/*while (digits < SIZE + 1) {
+			int n = i * j;
+			number = digitize(n, digits);
+			if (is_unique_digit(i, digits) == 0) {
+				return 0;
+			} else {
+
+			}
+			j++;
+		}*/
+
+	}
 }
 
