@@ -21,44 +21,52 @@ int is_prime(int n)
 	return 1;
 }
 
-int is_pandigital(int n)
+int is_n_digit_pandigital(int n)
 {
+	int digits = 0;
 	int *number = malloc(sizeof(int) * LENGTH);
-	int i = 0;
 
-	if (n == 0)
+	if (n == 0) {
 		return 0;
+	}
 
 	while (n) {
 		int remainder =	n % (LENGTH + 1);
 		if (remainder == 0)
 			return 0;
 		else {
-			for (int j = 0; j < i; j++) {
-				if (number[j] == remainder)
+			for (int i = 0; i < digits; i++) {
+				if (number[i] == remainder) {
+					free(number);
 					return 0;
+				}
 			}
-			number[i++] = remainder;
+			number[digits++] = remainder;
 		}
-
 		n /= LENGTH + 1;
 	}
+
+	int d = digits;
+	while (d > 0) {
+		if (number[d - 1] > digits) {
+			free(number);
+			return 0;
+		}
+		d--;
+	}
+	free(number);
+
 	return 1;
 }
 
 int main()
 {
-	/*for (int i = MAX; i > 475391826; i--) {
-		if ((is_pandigital(i)) && (is_prime(i))) {
-			printf("%d\n", i);
-			break;
-		}
-	}*/
-
-	for (int i = 475391826; i > 1; i--) {
-		if ((is_pandigital(i)) && (is_prime(i))) {
-			printf("%d\n", i);
-			break;
+	for (int i = MAX; i >= 1; i--) {
+		if (is_n_digit_pandigital(i)) {
+			if (is_prime(i)) {
+				printf("%d\n", i);
+				break;
+			}
 		}
 	}
 
